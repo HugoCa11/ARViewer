@@ -1,0 +1,24 @@
+{
+  "name": "com.unity.xr-content.mars-sim-environments",
+  "version": "1.0.0",
+  "displayName": "Unity MARS Simulation Environments",
+  "description": "A collection of indoor and outdoor Simulation environments and modular pieces to build your own.  Simulation environments are prefabs that act as snapshots of the real world in Unity MARS.",
+  "unity": "2019.3",
+  "unityRelease": "0f6",
+  "samples": [
+    {
+      "displayName": "Unity MARS Simulation Environments Content",
+      "description": "The content associated with the Unity MARS Simulation Environments.  This is installed into the project folder.",
+      "path": "UnityPackage~/",
+      "interactiveImport": true
+    }
+  ],
+  "upmCi": {
+    "footprint": "360aa8ebaef8957cdac441193682f3596e73b04d"
+  },
+  "repository": {
+    "url": "https://github.com/Unity-Technologies/com.unity.xr-content.mars-sim-environments.git",
+    "type": "git",
+    "revision": "5d28d60f3089b0fa94fe6dcc6c0142ed5b7a55a5"
+  }
+}
