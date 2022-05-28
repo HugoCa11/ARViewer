@@ -1,7 +1,0 @@
-﻿namespace Unity.MARS
-{
-    static partial class Pools
-    {
-{Dictionary_PROPERTIES}
-    }
-}
