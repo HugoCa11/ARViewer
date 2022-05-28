@@ -1,0 +1,10 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes: []
+  m_configObjects:
+    com.unity.mars-ar-foundation-providers.xr_subsystem_settings: {fileID: 11400000, guid: c00a721452b86174f989ebe2a06a12a6, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 421d3e3b3438c63459b3a8c6d3469b9f, type: 2}
