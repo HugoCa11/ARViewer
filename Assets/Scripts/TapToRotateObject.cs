@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TapToRotateObject : MonoBehaviour
 {
@@ -32,19 +33,27 @@ public class TapToRotateObject : MonoBehaviour
         }
 #endif
 
-        if (isPressing)
+        if (!IsPointerOverUIObject())
         {
-            Ray ray = Camera.main.ScreenPointToRay(pressPosition);
-
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            if (isPressing)
             {
-                if (hit.collider.tag == "Piece")
+                Ray ray = Camera.main.ScreenPointToRay(pressPosition);
+
+                if (Physics.Raycast(ray, out RaycastHit hit))
                 {
-                    selectedPiece = hit.transform.gameObject;
-                }
-                else if(hit.collider.tag != "Piece" && hit.collider.tag != "Plane")
-                {
-                    selectedPiece = null;
+                    if (hit.collider.tag == "Piece")
+                    {
+                        if (selectedPiece != null)
+                        {
+                            SetHighlighted(false);
+                        }
+                        selectedPiece = hit.transform.gameObject;
+                        SetHighlighted(true);
+                    }
+                    else if (hit.collider.tag != "Piece" && hit.collider.tag != "Plane")
+                    {
+                        selectedPiece = null;
+                    }
                 }
             }
         }
@@ -73,6 +82,26 @@ public class TapToRotateObject : MonoBehaviour
         else
         {
             Debug.Log($"Nothing to rotate");
+        }
+    }
+
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
+    }
+
+    public static void SetHighlighted(bool value)
+    {
+        if (selectedPiece != null)
+        {
+            Material material = selectedPiece.GetComponent<Renderer>().material;
+
+            material.SetColor("_EmissionColor", value ? new Color(0.5f, 0.5f, 0.5f, 1) : Color.black);
+            material.EnableKeyword("_EMISSION");
         }
     }
 }

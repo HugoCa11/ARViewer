@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TapToPlaceObject : MonoBehaviour
 {
@@ -32,16 +33,18 @@ public class TapToPlaceObject : MonoBehaviour
             isPressing = true;
         }
 #endif
-
-        if (isPressing)
+        if (!IsPointerOverUIObject())
         {
-            Ray ray = Camera.main.ScreenPointToRay(pressPosition);
-
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            if (isPressing)
             {
-                if(hit.collider.tag == "Plane")
+                Ray ray = Camera.main.ScreenPointToRay(pressPosition);
+
+                if (Physics.Raycast(ray, out RaycastHit hit))
                 {
-                    placeObject(hit);
+                    if (hit.collider.tag == "Plane")
+                    {
+                        placeObject(hit);
+                    }
                 }
             }
         }
@@ -53,7 +56,7 @@ public class TapToPlaceObject : MonoBehaviour
         Instantiate(objectsToSpawn[pieceIndex], hit.point, Quaternion.identity);
     } 
 
-    public static void selectPiece1()
+    public static void selectPiece()
     {
         pieceIndex = 0;
     }
@@ -61,5 +64,14 @@ public class TapToPlaceObject : MonoBehaviour
     public static void selectPiece2()
     {
         pieceIndex = 1;
+    }
+
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
     }
 }

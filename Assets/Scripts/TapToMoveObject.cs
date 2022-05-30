@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TapToMoveObject : MonoBehaviour
 {
-    private GameObject selectedPiece;
+    private static GameObject selectedPiece;
 
     private void Update()
     {
@@ -30,21 +31,28 @@ public class TapToMoveObject : MonoBehaviour
             isPressing = true;
         }
 #endif
-
-        if (isPressing)
+        if (!IsPointerOverUIObject())
         {
-            Ray ray = Camera.main.ScreenPointToRay(pressPosition);
-
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            if (isPressing)
             {
-                if (hit.collider.tag == "Piece")
-                {
-                    selectedPiece = hit.transform.gameObject;
-                }
+                Ray ray = Camera.main.ScreenPointToRay(pressPosition);
 
-                if (hit.collider.tag == "Plane" && selectedPiece != null)
+                if (Physics.Raycast(ray, out RaycastHit hit))
                 {
-                    moveObject(hit);
+                    if (hit.collider.tag == "Piece")
+                    {
+                        if (selectedPiece != null)
+                        {
+                            SetHighlighted(false);
+                        }
+                        selectedPiece = hit.transform.gameObject;
+                        SetHighlighted(true);
+                    }
+
+                    if (hit.collider.tag == "Plane" && selectedPiece != null)
+                    {
+                        moveObject(hit);
+                    }
                 }
             }
         }
@@ -53,5 +61,25 @@ public class TapToMoveObject : MonoBehaviour
     private void moveObject(RaycastHit hit)
     {
         selectedPiece.transform.position = hit.point;
+    }
+
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
+    }
+
+    public static void SetHighlighted(bool value)
+    {
+        if(selectedPiece != null)
+        {
+            Material material = selectedPiece.GetComponent<Renderer>().material;
+
+            material.SetColor("_EmissionColor", value ? new Color(0.5f, 0.5f, 0.5f, 1) : Color.black);
+            material.EnableKeyword("_EMISSION");
+        }        
     }
 }

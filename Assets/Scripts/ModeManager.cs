@@ -19,6 +19,8 @@ public class ModeManager : MonoBehaviour
         delete.SetActive(false);
         insert.SetActive(true);
         selectionCanvas.SetActive(true);
+        TapToMoveObject.SetHighlighted(false);
+        TapToRotateObject.SetHighlighted(false);
     }
 
     public void moveMode()
@@ -30,6 +32,7 @@ public class ModeManager : MonoBehaviour
         rotate.SetActive(false);
         delete.SetActive(false);
         move.SetActive(true);
+        TapToRotateObject.SetHighlighted(false);
     }
 
     public void rotateMode()
@@ -41,6 +44,7 @@ public class ModeManager : MonoBehaviour
         delete.SetActive(false);
         rotate.SetActive(true);
         rotationCanvas.SetActive(true);
+        TapToMoveObject.SetHighlighted(false);
     }
 
     public void deleteMode()
@@ -52,5 +56,7 @@ public class ModeManager : MonoBehaviour
         move.SetActive(false);
         rotate.SetActive(false);
         delete.SetActive(true);
+        TapToMoveObject.SetHighlighted(false);
+        TapToRotateObject.SetHighlighted(false);
     }
 }
