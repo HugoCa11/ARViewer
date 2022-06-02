@@ -8,9 +8,11 @@ public class PanelClose : MonoBehaviour
 
     public void ClosePanel()
     {
+        //Debug.Log("Hello Close!");
         if (Swipper != null)
         {
-            Swipper.SetActive(false);
+            TapToPlaceObject.setIndex();
+            Swipper.SetActive(false);    
         }
     }
 

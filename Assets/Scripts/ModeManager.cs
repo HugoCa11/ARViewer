@@ -9,7 +9,7 @@ public class ModeManager : MonoBehaviour
     public GameObject rotate;
     public GameObject delete;
     public GameObject rotationCanvas;
-    public GameObject selectionCanvas;
+
     public void insertMode()
     {
         Debug.Log($"Insert Mode");
@@ -18,7 +18,6 @@ public class ModeManager : MonoBehaviour
         rotate.SetActive(false);
         delete.SetActive(false);
         insert.SetActive(true);
-        selectionCanvas.SetActive(true);
         TapToMoveObject.SetHighlighted(false);
         TapToRotateObject.SetHighlighted(false);
     }
@@ -26,7 +25,6 @@ public class ModeManager : MonoBehaviour
     public void moveMode()
     {
         Debug.Log($"Move Mode");
-        selectionCanvas.SetActive(false);
         rotationCanvas.SetActive(false);
         insert.SetActive(false);
         rotate.SetActive(false);
@@ -38,7 +36,6 @@ public class ModeManager : MonoBehaviour
     public void rotateMode()
     {
         Debug.Log($"Rotate Mode");
-        selectionCanvas.SetActive(false);
         insert.SetActive(false);
         move.SetActive(false);        
         delete.SetActive(false);
@@ -50,7 +47,6 @@ public class ModeManager : MonoBehaviour
     public void deleteMode()
     {
         Debug.Log($"Delete Mode");
-        selectionCanvas.SetActive(false);
         rotationCanvas.SetActive(false);
         insert.SetActive(false);
         move.SetActive(false);

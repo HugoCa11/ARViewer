@@ -59,7 +59,7 @@ public class TapToPlaceObject : MonoBehaviour
     public static void setIndex()
     {
         string buttonPressed = EventSystem.current.currentSelectedGameObject.name;
-        Debug.Log($"button pressed: {EventSystem.current.currentSelectedGameObject.name}");
+        //Debug.Log($"button pressed: {EventSystem.current.currentSelectedGameObject.name}");
 
         switch (buttonPressed)
         {
@@ -100,11 +100,6 @@ public class TapToPlaceObject : MonoBehaviour
                 pieceIndex = 11;
                 break;
         }
-    }
-
-    public static void selectPiece2()
-    {
-        pieceIndex = 1;
     }
 
     private bool IsPointerOverUIObject()
