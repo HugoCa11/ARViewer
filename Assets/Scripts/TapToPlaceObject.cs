@@ -56,9 +56,50 @@ public class TapToPlaceObject : MonoBehaviour
         Instantiate(objectsToSpawn[pieceIndex], hit.point, Quaternion.identity);
     } 
 
-    public static void selectPiece()
+    public static void setIndex()
     {
-        pieceIndex = 0;
+        string buttonPressed = EventSystem.current.currentSelectedGameObject.name;
+        Debug.Log($"button pressed: {EventSystem.current.currentSelectedGameObject.name}");
+
+        switch (buttonPressed)
+        {
+            case "Piece1":
+                pieceIndex = 0;
+                break;
+            case "Piece2":
+                pieceIndex = 1;
+                break;
+            case "Piece3":
+                pieceIndex = 2;
+                break;
+            case "Piece4":
+                pieceIndex = 3;
+                break;
+            case "Piece5":
+                pieceIndex = 4;
+                break;
+            case "Piece6":
+                pieceIndex = 5;
+                break;
+            case "Piece7":
+                pieceIndex = 6;
+                break;
+            case "Piece8":
+                pieceIndex = 7;
+                break;
+            case "Piece9":
+                pieceIndex = 8;
+                break;
+            case "Piece10":
+                pieceIndex = 9;
+                break;
+            case "Piece11":
+                pieceIndex = 10;
+                break;
+            case "Piece12":
+                pieceIndex = 11;
+                break;
+        }
     }
 
     public static void selectPiece2()
