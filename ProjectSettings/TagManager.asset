@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Plane
   - Piece
+  - Swipe
   layers:
   - Default
   - TransparentFX
